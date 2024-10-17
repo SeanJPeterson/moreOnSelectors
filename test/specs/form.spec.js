@@ -116,14 +116,15 @@ describe("Form validation selectors practice", () => {
     );
   });
   //Select file - Leave for later!
-  xit('Adding a file', async () => {
+  xit("Adding a file", async () => {
     //Scrolls element into view
     await FormPage.file.scrollIntoView();
-     //Waits for the object to be Clickable
-     await FormPage.file.waitForClickable();
-     //Clicks the object
-     await FormPage.file.click();
-
+    //Selects a file to add to the website
+    const path = require('path')
+    const filePath = path.join(__dirname, '../data/file.pages')
+    const remoteFilePath = await browser.uploadFile(filePath)
+    await FormPage.file.setValue(remoteFilePath)
+    await browser.pause(2000)
   });
   //Selects that I agree -checkbox-
   it('Select the "I agree" check box', async () => {
